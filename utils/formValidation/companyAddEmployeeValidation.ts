@@ -1,7 +1,9 @@
-import IAddEmployeeInfo from "../types/requests/companiesFormAddEmployeeInterface";
-import IAddMembersErrorInfo from "../types/requests/companiesFormAddEmployeeErrorInterface";
+import IAddEmployeeInfo from '../types/requests/companiesFormAddEmployeeInterface';
+import IAddMembersErrorInfo from '../types/requests/companiesFormAddEmployeeErrorInterface';
 
-export default function companyAddEmployeeValidation(values: IAddEmployeeInfo): IAddMembersErrorInfo {
+export default function companyAddEmployeeValidation(
+  values: IAddEmployeeInfo,
+): IAddMembersErrorInfo {
   let errors: IAddMembersErrorInfo = {};
   if (!/^(?=\S)(?!.*[^\x20-\x7E])(?=.{3,50}$)[a-zA-Z ]+$/.test(values.name)) errors.name = 'El nombre es obligatorio';
   if (!/^(?=\S)(?!.*[^\x20-\x7E])(?=.{3,50}$)[a-zA-Z ]+$/.test(values.lastname)) errors.lastname = 'El apellido es obligatorio';
@@ -11,6 +13,4 @@ export default function companyAddEmployeeValidation(values: IAddEmployeeInfo): 
   if (!/^[a-zA-Z\s\-']{3,50}$/.test(values.position)) errors.position = 'El puesto debe tener entre 3 y 50 caracteres y puede incluir letras, espacios, guiones y apóstrofes';
 
   return errors;
-};
-
-
+}

@@ -16,6 +16,7 @@ const useLoginForm = () => {
     email: '',
     password: '',
   });
+  const [loading, setLoading] = useState(false);
 
   const [LoginFormError, setLoginFormError] = useState<ILoginErrorForm>({
     email: '',
@@ -32,10 +33,12 @@ const useLoginForm = () => {
     setLoginFormError(errors);
     if (errors.email || errors.password) return;
 
+    setLoading(true);
     const data = await HandleLogin(LoginForm);
+    setLoading(false);
 
-    //const data = await PostLogin(LoginForm);
     if (!data.error) {
+
       setUser(data.user);
       setToken(data.token);
       await Swal.fire({
@@ -54,10 +57,11 @@ const useLoginForm = () => {
         icon: 'error',
         title: 'Error',
         text: 'Usuario o contraseña incorrectos',
+        confirmButtonColor: '#222B2D',
       });
     }
   };
 
-  return { LoginForm, LoginFormError, handleChange, handleSubmit }
-}
-export default useLoginForm
+  return { LoginForm, LoginFormError, loading, handleChange, handleSubmit };
+};
+export default useLoginForm;

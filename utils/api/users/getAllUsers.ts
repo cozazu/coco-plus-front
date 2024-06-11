@@ -3,6 +3,7 @@ import { axiosApi } from '../api';
 const getAllUsers = async (url?: string) => {
   try {
     const response = await axiosApi.get(`/users${url || ''}`);
+    console.log("response", response.data);
     return response.data;
   } catch (error: any) {
     let message = '';
